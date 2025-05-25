@@ -1,0 +1,72 @@
+2025-05-24 20:24:17.602 [main] [] INFO  c.e.springboot.SpringbootApplication - Starting SpringbootApplication v0.0.1-SNAPSHOT using Java 21.0.7 with PID 1 (/app/app.jar started by root in /app)
+2025-05-24 20:24:17.606 [main] [] DEBUG c.e.springboot.SpringbootApplication - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-05-24 20:24:17.607 [main] [] INFO  c.e.springboot.SpringbootApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-24 20:24:18.674 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-24 20:24:18.677 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-24 20:24:18.814 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 124 ms. Found 1 JPA repository interface.
+2025-05-24 20:24:18.838 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-24 20:24:18.840 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-24 20:24:18.859 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.springboot.repository.ProductRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-24 20:24:18.859 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2025-05-24 20:24:19.638 [main] [] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-05-24 20:24:19.656 [main] [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-05-24 20:24:19.657 [main] [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-05-24 20:24:19.695 [main] [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-05-24 20:24:19.697 [main] [] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2027 ms
+2025-05-24 20:24:19.708 [main] [] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'traceIdFilter' defined in class path resource [com/example/springboot/config/TracingConfig.class]: Unsatisfied dependency expressed through method 'traceIdFilter' parameter 0: No qualifying bean of type 'io.micrometer.tracing.Tracer' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-05-24 20:24:19.740 [main] [] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-05-24 20:24:19.756 [main] [] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2025-05-24 20:24:19.770 [main] [] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-05-24 20:24:19.804 [main] [] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of method traceIdFilter in com.example.springboot.config.TracingConfig required a bean of type 'io.micrometer.tracing.Tracer' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'io.micrometer.tracing.Tracer' in your configuration.
+
+2025-05-24 20:27:32.688 [main] [] INFO  c.e.springboot.SpringbootApplication - Starting SpringbootApplication v0.0.1-SNAPSHOT using Java 21.0.7 with PID 1 (/app/app.jar started by root in /app)
+2025-05-24 20:27:32.692 [main] [] DEBUG c.e.springboot.SpringbootApplication - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-05-24 20:27:32.693 [main] [] INFO  c.e.springboot.SpringbootApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-24 20:27:33.643 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-24 20:27:33.647 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-24 20:27:33.766 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 108 ms. Found 1 JPA repository interface.
+2025-05-24 20:27:33.791 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-24 20:27:33.793 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-24 20:27:33.812 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.springboot.repository.ProductRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-24 20:27:33.813 [main] [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2025-05-24 20:27:34.482 [main] [] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-05-24 20:27:34.494 [main] [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-05-24 20:27:34.495 [main] [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-05-24 20:27:34.527 [main] [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-05-24 20:27:34.528 [main] [] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1777 ms
+2025-05-24 20:27:34.543 [main] [] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'traceIdFilter' defined in class path resource [com/example/springboot/config/TracingConfig.class]: Unsatisfied dependency expressed through method 'traceIdFilter' parameter 0: No qualifying bean of type 'io.micrometer.tracing.Tracer' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-05-24 20:27:34.564 [main] [] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-05-24 20:27:34.574 [main] [] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2025-05-24 20:27:34.585 [main] [] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-05-24 20:27:34.611 [main] [] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of method traceIdFilter in com.example.springboot.config.TracingConfig required a bean of type 'io.micrometer.tracing.Tracer' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'io.micrometer.tracing.Tracer' in your configuration.
+
