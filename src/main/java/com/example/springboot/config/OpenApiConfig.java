@@ -14,28 +14,22 @@ import java.util.List;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI myOpenAPI() {
-        Server devServer = new Server();
-        devServer.setUrl("http://localhost:8080");
-        devServer.setDescription("Development server");
-
-        Contact contact = new Contact();
-        contact.setName("Product API Support");
-        contact.setEmail("support@example.com");
-
-        License mitLicense = new License()
-                .name("MIT License")
-                .url("https://choosealicense.com/licenses/mit/");
-
-        Info info = new Info()
-                .title("Product Management API")
-                .version("1.0")
-                .contact(contact)
-                .description("This API exposes endpoints to manage products.")
-                .license(mitLicense);
-
+    public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(info)
-                .servers(List.of(devServer));
+                .info(new Info()
+                        .title("Product Management API")
+                        .version("1.0.0")
+                        .description("A comprehensive REST API for managing products with caching, logging, and monitoring capabilities")
+                        .contact(new Contact()
+                                .name("Development Team")
+                                .email("dev@example.com")
+                                .url("https://github.com/your-repo"))
+                        .license(new License()
+                                .name("MIT License")
+                                .url("https://opensource.org/licenses/MIT")))
+                .servers(List.of(
+                        new Server().url("http://localhost:8080").description("Development server"),
+                        new Server().url("https://api.example.com").description("Production server")
+                ));
     }
 } 

@@ -7,24 +7,105 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
   data:
     redis:
       host: localhost
       port: 6379
+      timeout: 2000ms
+    # MongoDB Configuration
+    mongodb:
+      uri: mongodb://localhost:27017/productdb
+      database: productdb
+    # Cassandra Configuration
+    cassandra:
+      contact-points: localhost:9042
+      keyspace-name: productdb
+      local-datacenter: datacenter1
+      port: 9042
+    # Neo4j Configuration
+    neo4j:
+      uri: bolt://localhost:7687
+      authentication:
+        username: neo4j
+        password: password
+  # Kafka Configuration
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: springboot-app
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+  # RabbitMQ Configuration
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+  # Consul Configuration
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        service-name: springboot-app
+      config:
+        enabled: true
+    # Vault Configuration
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      authentication: TOKEN
+      token: dev-token
   application:
     name: product-service
 
+# JWT Configuration
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  expiration: 86400000 # 24 hours
+  refresh-token:
+    expiration: 604800000 # 7 days
+
+# Management & Monitoring Configuration
 management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
   tracing:
     sampling:
       probability: 1.0
     enabled: true
 
+# Logging Configuration
 logging:
   level:
     root: INFO
     com.example.springboot: DEBUG
     org.springframework: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] [%X{traceId}] %-5level %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] [%X{traceId}] %-5level %logger{36} - %msg%n"
@@ -33,4 +114,91 @@ logging:
   logback:
     rollingpolicy:
       max-file-size: 10MB
-      max-history: 7 
+      max-history: 7
+
+# Server Configuration
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always 
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+
+# Cache Configuration
+spring:
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterWrite=600s
+
+# WebSocket Configuration
+spring:
+  websocket:
+    max-text-message-size: 8192
+    max-binary-message-size: 8192
+
+# GraphQL Configuration
+graphql:
+  servlet:
+    enabled: true
+    mapping: /graphql
+    cors:
+      enabled: true
+      allowed-origins: "*"
+      allowed-methods: GET,POST,OPTIONS
+      allowed-headers: "*"
+
+# gRPC Configuration
+grpc:
+  server:
+    port: 9090
+    enable-reflection: true
+
+# Resilience4j Configuration
+resilience4j:
+  circuitbreaker:
+    instances:
+      default:
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        permitted-number-of-calls-in-half-open-state: 3
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 5s
+        failure-rate-threshold: 50
+        event-consumer-buffer-size: 10
+  retry:
+    instances:
+      default:
+        max-attempts: 3
+        wait-duration: 1s
+        retry-exceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+  ratelimiter:
+    instances:
+      default:
+        limit-for-period: 10
+        limit-refresh-period: 1s
+        timeout-duration: 1s
+
+# Micrometer Configuration
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      percentiles:
+        http.server.requests: 0.5,0.95,0.99
+    export:
+      influx:
+        enabled: false
+        uri: http://localhost:8086
+        database: metrics
+        step: 10s
+      jmx:
+        enabled: true 

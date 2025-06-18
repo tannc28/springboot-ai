@@ -1,26 +1,37 @@
 package com.example.springboot.config;
 
+import io.micrometer.tracing.Tracer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import io.micrometer.tracing.Tracer;
 import org.slf4j.MDC;
 import jakarta.servlet.Filter;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @Configuration
 public class TracingConfig {
 
     @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public Filter traceIdFilter(Tracer tracer) {
-        return (request, response, chain) -> {
-            String traceId = tracer.currentSpan().context().traceId();
-            MDC.put("traceId", traceId);
-            try {
-                chain.doFilter(request, response);
-            } finally {
-                MDC.remove("traceId");
+    public Filter traceIdFilter() {
+        return new Filter() {
+            @Override
+            public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+                    throws IOException, ServletException {
+                try {
+                    if (request instanceof HttpServletRequest) {
+                        String traceId = ((HttpServletRequest) request).getHeader("X-Trace-Id");
+                        if (traceId != null) {
+                            MDC.put("traceId", traceId);
+                        }
+                    }
+                    chain.doFilter(request, response);
+                } finally {
+                    MDC.clear();
+                }
             }
         };
     }
